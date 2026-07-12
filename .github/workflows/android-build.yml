@@ -16,11 +16,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup JDK 17
+      - name: Setup JDK 21
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '21'
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
@@ -46,9 +46,9 @@ jobs:
           # 文件本身是密码加密的，即使仓库 public 也不能直接用
           cp .github/keystore/napkin-release.jks napkin-release.keystore
           echo "KEYSTORE_PATH=$(pwd)/napkin-release.keystore" >> $GITHUB_ENV
-          echo "KEYSTORE_PASSWORD=Napkin2026!" >> $GITHUB_ENV
-          echo "KEY_ALIAS=napkin" >> $GITHUB_ENV
-          echo "KEY_PASSWORD=Napkin2026!" >> $GITHUB_ENV
+          printf 'KEYSTORE_PASSWORD=%s\n' 'Napkin2026!' >> $GITHUB_ENV
+          printf 'KEY_ALIAS=%s\n' 'napkin' >> $GITHUB_ENV
+          printf 'KEY_PASSWORD=%s\n' 'Napkin2026!' >> $GITHUB_ENV
 
       - name: Build Debug APK
         env:

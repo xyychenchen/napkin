@@ -13,6 +13,11 @@ Adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - 批量生成（同 prompt 多 seed）
 - 自定义 prompt 模板
 
+## [0.1.8] - 2026-07-12
+
+### Fixed
+- CI 改用 JDK 21（与本地生成 keystore 时一致），解决 JDK 17 无法读取 PKCS12 legacy keystore 的"keystore password was incorrect"错误。Kotlin/Java 字节码目标仍保持 17。
+
 ## [0.1.7] - 2026-07-12
 
 ### Fixed

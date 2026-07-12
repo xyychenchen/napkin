@@ -12,8 +12,8 @@ android {
         applicationId = "com.imageflow.app"
         minSdk = 26
         targetSdk = 34
-        versionCode = 8
-        versionName = "0.1.7"
+        versionCode = 9
+        versionName = "0.1.8"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
@@ -58,6 +58,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+    // 即使编译用 JDK 21，目标字节码仍保持 17，保证兼容性
     kotlinOptions { jvmTarget = "17" }
     buildFeatures {
         compose = true
