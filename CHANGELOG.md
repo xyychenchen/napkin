@@ -13,6 +13,11 @@ Adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - 批量生成（同 prompt 多 seed）
 - 自定义 prompt 模板
 
+## [0.1.7] - 2026-07-12
+
+### Fixed
+- 修复签名 keystore 兼容性：JKS 格式新版 JDK 不再默认支持（"Keystore was tampered with, or password was incorrect"），改用 PKCS12 + `-J-Dkeystore.pkcs12.legacy` 生成兼容老算法的 PKCS12 keystore。
+
 ## [0.1.6] - 2026-07-12
 
 ### Fixed
