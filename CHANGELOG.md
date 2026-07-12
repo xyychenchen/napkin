@@ -13,6 +13,11 @@ Adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - 批量生成（同 prompt 多 seed）
 - 自定义 prompt 模板
 
+## [0.1.4] - 2026-07-12
+
+### Fixed
+- 修复 Release 构建 R8 缺类错误：`security-crypto` 传递依赖 `tink` 引用了 `com.google.errorprone.annotations.*` 但该库未在 runtime classpath。在 `proguard-rules.pro` 加 `-dontwarn com.google.errorprone.annotations.**`
+
 ## [0.1.3] - 2026-07-12
 
 ### Fixed
