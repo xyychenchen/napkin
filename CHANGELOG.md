@@ -13,6 +13,11 @@ Adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - 批量生成（同 prompt 多 seed）
 - 自定义 prompt 模板
 
+## [0.1.5] - 2026-07-12
+
+### Fixed
+- 修复 Release 构建 R8 缺类错误（续）：Coil 3 是 Kotlin Multiplatform 项目，部分 expect/actual 类（如 `coil3.PlatformContext`）R8 找不到 actual 实现。proguard-rules.pro 加 `-dontwarn coil3.**` + 完整 keep。同时预防性加上 bouncycastle / conscrypt / openjsse 的 dontwarn。
+
 ## [0.1.4] - 2026-07-12
 
 ### Fixed
