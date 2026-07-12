@@ -90,7 +90,7 @@ class GeminiApi(
         )
 
         if (!response.isSuccessful) {
-            val errBody = response.body()?.string() ?: ""
+            val errBody = response.body?.string() ?: ""
             response.close()
             return@withContext GenerateResult(
                 success = false,
@@ -98,7 +98,7 @@ class GeminiApi(
             )
         }
 
-        val respStr = response.body()?.string() ?: ""
+        val respStr = response.body?.string() ?: ""
         response.close()
         parseSuccessResponse(respStr)
     }

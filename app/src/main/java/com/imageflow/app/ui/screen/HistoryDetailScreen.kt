@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.imageflow.app.util.TimeFormatter
 import com.imageflow.app.viewmodel.GenerateViewModel
+import kotlinx.coroutines.launch
 import java.io.File
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -32,6 +33,7 @@ fun HistoryDetailScreen(
     val isGenerating by vm.isGenerating.collectAsState()
 
     var showDeleteDialog by remember { mutableStateOf(false) }
+    val coroutineScope = rememberCoroutineScope()
 
     Scaffold(
         topBar = {
@@ -155,9 +157,11 @@ fun HistoryDetailScreen(
             confirmButton = {
                 TextButton(
                     onClick = {
-                        vm.deleteHistory(historyId)
-                        showDeleteDialog = false
-                        onBack()
+                        coroutineScope.launch {
+                            vm.deleteHistory(historyId)
+                            showDeleteDialog = false
+                            onBack()
+                        }
                     },
                     colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.error)
                 ) { Text("删除") }

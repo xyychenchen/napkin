@@ -12,6 +12,7 @@ import com.imageflow.app.network.GenerateRequest
 import com.imageflow.app.network.GenerateResult
 import com.imageflow.app.network.GeminiModel
 import com.imageflow.app.network.InputImage
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -150,11 +151,8 @@ class GenerateViewModel(app: Application) : AndroidViewModel(app) {
             val result = repo.generate(apiKey, request, previousHistoryId)
             _isGenerating.value = false
             if (result.success) {
-                // 拿最新一条历史作为结果
-                _lastResult.value = repo.getHistory(repo.observeRecentHistory().let { flow ->
-                    // 简单做法：直接查最近一条
-                    recentHistory.value.firstOrNull()
-                })
+                // 拿最新一条历史作为结果（recentHistory 会自动更新）
+                _lastResult.value = recentHistory.value.firstOrNull()
             } else {
                 _lastError.value = result.errorMessage
             }

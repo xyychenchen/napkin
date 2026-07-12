@@ -13,6 +13,14 @@ Adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - 批量生成（同 prompt 多 seed）
 - 自定义 prompt 模板
 
+## [0.1.1] - 2026-07-12
+
+### Fixed
+- 修复编译错误：OkHttp 4 的 `response.body()` 已改为 val `response.body`
+- 修复编译错误：`HistoryDetailScreen` 删除操作需在 coroutine 里调 suspend 函数
+- 修复编译错误：`GenerateViewModel` 缺 `Flow` import
+- 修复 `GenerateViewModel.generate()` 拿 lastResult 时类型不匹配
+
 ## [0.1.0] - 2026-07-12
 
 ### Added

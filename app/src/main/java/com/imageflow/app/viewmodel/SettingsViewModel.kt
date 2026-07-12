@@ -104,12 +104,12 @@ class SettingsViewModel(app: Application) : AndroidViewModel(app) {
                         .build()
                     client.newCall(req).execute().use { resp ->
                         if (resp.isSuccessful) {
-                            val body = resp.body()?.string() ?: ""
+                            val body = resp.body?.string() ?: ""
                             val json = JSONObject(body)
                             val models = json.optJSONArray("models")
                             "✅ 连接成功，可用模型数：${models?.length() ?: 0}"
                         } else {
-                            val body = resp.body()?.string() ?: ""
+                            val body = resp.body?.string() ?: ""
                             val msg = try {
                                 JSONObject(body).optJSONObject("error")?.optString("message", "") ?: body
                             } catch (e: Exception) { body }
