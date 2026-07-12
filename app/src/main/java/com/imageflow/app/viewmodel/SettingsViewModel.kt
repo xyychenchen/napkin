@@ -113,7 +113,7 @@ class SettingsViewModel(app: Application) : AndroidViewModel(app) {
                             val msg = try {
                                 JSONObject(body).optJSONObject("error")?.optString("message", "") ?: body
                             } catch (e: Exception) { body }
-                            "❌ HTTP ${resp.code()}: $msg"
+                            "❌ HTTP ${resp.code}: $msg"
                         }
                     }
                 } catch (e: Exception) {

@@ -94,7 +94,7 @@ class GeminiApi(
             response.close()
             return@withContext GenerateResult(
                 success = false,
-                errorMessage = parseHttpError(response.code(), errBody)
+                errorMessage = parseHttpError(response.code, errBody)
             )
         }
 

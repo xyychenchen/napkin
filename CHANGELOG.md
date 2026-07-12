@@ -13,6 +13,11 @@ Adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - 批量生成（同 prompt 多 seed）
 - 自定义 prompt 模板
 
+## [0.1.2] - 2026-07-12
+
+### Fixed
+- 修复 `response.code()` 编译错误（OkHttp 4 已改为 val `response.code`）
+
 ## [0.1.1] - 2026-07-12
 
 ### Fixed
