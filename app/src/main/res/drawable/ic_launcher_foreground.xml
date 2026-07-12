@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- 简化版 "IF" logo：两个白色矩形构成字母 I + F -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M30,30 L38,30 L38,78 L30,78 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M50,30 L78,30 L78,38 L58,38 L58,50 L74,50 L74,58 L58,58 L58,78 L50,78 Z" />
+</vector>

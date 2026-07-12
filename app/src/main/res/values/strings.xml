@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ImageFlow</string>
+    <string name="action_settings">设置</string>
+    <string name="action_back">返回</string>
+    <string name="action_generate">生成</string>
+    <string name="action_delete">删除</string>
+    <string name="action_continue_edit">基于此继续编辑</string>
+    <string name="empty_canvas_title">还没有生成过图片</string>
+    <string name="empty_canvas_hint">在下方输入描述，点「生成」开始</string>
+    <string name="prompt_placeholder">描述你想要的图片…</string>
+    <string name="prompt_placeholder_no_key">请先去设置页填写 API Key…</string>
+    <string name="settings_section_apikey">API Key</string>
+    <string name="settings_section_model">默认模型</string>
+    <string name="settings_section_params">默认参数</string>
+    <string name="settings_test_connection">测试连接</string>
+    <string name="settings_apikey_hint">从 https://aistudio.google.com/apikey 获取</string>
+    <string name="generating">生成中…</string>
+    <string name="history_title">最近生成</string>
+    <string name="param_model">模型</string>
+    <string name="param_aspect_ratio">宽高比</string>
+    <string name="param_image_size">分辨率</string>
+    <string name="param_output_format">输出格式</string>
+    <string name="param_google_search">启用 Google 搜索</string>
+</resources>
