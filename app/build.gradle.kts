@@ -12,8 +12,8 @@ android {
         applicationId = "com.imageflow.app"
         minSdk = 26
         targetSdk = 34
-        versionCode = 3
-        versionName = "0.1.2"
+        versionCode = 4
+        versionName = "0.1.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
@@ -22,13 +22,13 @@ android {
     signingConfigs {
         create("release") {
             // 从环境变量读取 keystore 信息（CI 里通过 Secrets 注入）
-            // 本地开发没设置就走默认 debug 签名
-            val keystorePath = System.getenv("KEYSTORE_PATH")
-            if (keystorePath != null) {
+            // 本地开发或 CI 没设置就走默认 debug 签名
+            val keystorePath = System.getenv("KEYSTORE_PATH") ?: ""
+            if (keystorePath.isNotEmpty()) {
                 storeFile = file(keystorePath)
-                storePassword = System.getenv("KEYSTORE_PASSWORD")
-                keyAlias = System.getenv("KEY_ALIAS")
-                keyPassword = System.getenv("KEY_PASSWORD")
+                storePassword = System.getenv("KEYSTORE_PASSWORD") ?: ""
+                keyAlias = System.getenv("KEY_ALIAS") ?: ""
+                keyPassword = System.getenv("KEY_PASSWORD") ?: ""
             }
         }
     }
@@ -42,7 +42,8 @@ android {
                 "proguard-rules.pro"
             )
             // 配置了 keystore 环境变量才启用 release 签名
-            if (System.getenv("KEYSTORE_PATH") != null) {
+            val keystorePath = System.getenv("KEYSTORE_PATH") ?: ""
+            if (keystorePath.isNotEmpty()) {
                 signingConfig = signingConfigs.getByName("release")
             }
         }

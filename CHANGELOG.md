@@ -13,6 +13,11 @@ Adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - 批量生成（同 prompt 多 seed）
 - 自定义 prompt 模板
 
+## [0.1.3] - 2026-07-12
+
+### Fixed
+- 修复 Gradle 配置错误：`KEYSTORE_PATH` 环境变量为空字符串时 `file("")` 报"path may not be null or empty"。改成 `isNotEmpty()` 判断，让 main 分支构建（无签名）也能跑通。
+
 ## [0.1.2] - 2026-07-12
 
 ### Fixed
