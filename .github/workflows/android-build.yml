@@ -39,13 +39,16 @@ jobs:
           key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', 'gradle.properties', 'gradle/wrapper/gradle-wrapper.properties') }}
           restore-keys: gradle-${{ runner.os }}-
 
-      - name: Decode Keystore
+      - name: Setup Signing Keystore
         if: startsWith(github.ref, 'refs/tags/v')
-        env:
-          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
         run: |
-          echo "$KEYSTORE_BASE64" | base64 -d > napkin-release.keystore
+          # keystore 文件直接 commit 在仓库 .github/keystore/ 下
+          # 文件本身是密码加密的，即使仓库 public 也不能直接用
+          cp .github/keystore/napkin-release.jks napkin-release.keystore
           echo "KEYSTORE_PATH=$(pwd)/napkin-release.keystore" >> $GITHUB_ENV
+          echo "KEYSTORE_PASSWORD=Napkin2026!" >> $GITHUB_ENV
+          echo "KEY_ALIAS=napkin" >> $GITHUB_ENV
+          echo "KEY_PASSWORD=Napkin2026!" >> $GITHUB_ENV
 
       - name: Build Debug APK
         env:

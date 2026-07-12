@@ -33,9 +33,10 @@ proguard/
 *.iml
 .idea/
 
-# Keystore files (never commit)
+# Keystore files (never commit) - except the project's release keystore
 *.jks
 *.keystore
+!.github/keystore/napkin-release.jks
 
 # External native build folder
 .externalNativeBuild/

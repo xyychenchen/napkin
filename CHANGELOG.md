@@ -13,6 +13,14 @@ Adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - 批量生成（同 prompt 多 seed）
 - 自定义 prompt 模板
 
+## [0.1.6] - 2026-07-12
+
+### Fixed
+- 修复 Release 构建签名失败：之前用 Python `cryptography` 生成的 PKCS12 keystore 用了 AES-256-GCM，Android 签名工具（Java keytool）报"Tag number over 30 is not supported"。
+- 改用 JDK 21 keytool 生成标准 JKS 格式 keystore，密码 `Napkin2026!`，证书 25 年有效期。
+- keystore 文件直接 commit 在 `.github/keystore/napkin-release.jks`（文件本身密码加密，公开仓库也安全）。
+- CI workflow 从仓库直接读 keystore，不再依赖 GitHub Secrets（避免 PAT 权限问题）。
+
 ## [0.1.5] - 2026-07-12
 
 ### Fixed
