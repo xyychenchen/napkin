@@ -13,6 +13,11 @@ Adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - 批量生成（同 prompt 多 seed）
 - 自定义 prompt 模板
 
+## [0.1.10] - 2026-07-12
+
+### Changed
+- 加 keystore 验证 + 环境变量 debug 输出，定位"keystore password was incorrect"根因
+
 ## [0.1.9] - 2026-07-12
 
 ### Changed
