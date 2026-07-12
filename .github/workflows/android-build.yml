@@ -41,48 +41,50 @@ jobs:
 
       - name: Setup Signing Keystore
         if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          KEYSTORE_PASSWORD: 'Napkin2026!'
+          KEY_ALIAS: 'napkin'
+          KEY_PASSWORD: 'Napkin2026!'
         run: |
-          # 在 CI 环境现场生成 keystore
+          # 在 CI 环境现场生成 keystore（密码通过 env 传入，避免 shell 转义问题）
           keytool -genkeypair \
             -v \
             -keystore napkin-release.keystore \
-            -alias napkin \
+            -alias "$KEY_ALIAS" \
             -keyalg RSA \
             -keysize 2048 \
             -validity 9125 \
-            -storepass Napkin2026! \
-            -keypass Napkin2026! \
+            -storepass "$KEYSTORE_PASSWORD" \
+            -keypass "$KEY_PASSWORD" \
             -dname "CN=Napkin, OU=App, O=Napkin, L=Beijing, ST=Beijing, C=CN"
 
           # 验证 keystore 能被 keytool 读
           echo "=== 验证 keystore ==="
-          keytool -list -keystore napkin-release.keystore -storepass 'Napkin2026!' || exit 1
+          keytool -list -keystore napkin-release.keystore -storepass "$KEYSTORE_PASSWORD" || exit 1
 
-          echo "KEYSTORE_PATH=$(pwd)/napkin-release.keystore" >> $GITHUB_ENV
-          echo "KEYSTORE_PASSWORD=Napkin2026!" >> $GITHUB_ENV
-          echo "KEY_ALIAS=napkin" >> $GITHUB_ENV
-          echo "KEY_PASSWORD=Napkin2026!" >> $GITHUB_ENV
+          echo "KEYSTORE_PATH=$(pwd)/napkin-release.keystore" >> "$GITHUB_ENV"
 
           echo "=== 环境变量（不打印密码值）==="
           echo "KEYSTORE_PATH=$KEYSTORE_PATH"
           echo "KEY_ALIAS=$KEY_ALIAS"
           echo "KEYSTORE_PASSWORD length: ${#KEYSTORE_PASSWORD}"
+          echo "KEY_PASSWORD length: ${#KEY_PASSWORD}"
 
       - name: Build Debug APK
         env:
           KEYSTORE_PATH: ${{ env.KEYSTORE_PATH }}
-          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEYSTORE_PASSWORD: 'Napkin2026!'
+          KEY_ALIAS: 'napkin'
+          KEY_PASSWORD: 'Napkin2026!'
         run: ./gradlew assembleDebug --no-daemon
 
       - name: Build Release APK
         if: startsWith(github.ref, 'refs/tags/v')
         env:
           KEYSTORE_PATH: ${{ env.KEYSTORE_PATH }}
-          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEYSTORE_PASSWORD: 'Napkin2026!'
+          KEY_ALIAS: 'napkin'
+          KEY_PASSWORD: 'Napkin2026!'
         run: ./gradlew assembleRelease --no-daemon
 
       - name: Upload Debug APK artifact

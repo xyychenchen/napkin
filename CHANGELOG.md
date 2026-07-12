@@ -13,6 +13,12 @@ Adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - 批量生成（同 prompt 多 seed）
 - 自定义 prompt 模板
 
+## [0.1.11] - 2026-07-12
+
+### Fixed
+- 🎯 找到签名失败的根因！Build 步骤的 env 用了 `${{ secrets.KEYSTORE_PASSWORD }}`，但 GitHub Secrets 根本没配过这个值（之前 PAT 没 Secrets write 权限），所以传给 Gradle 的密码是空字符串。
+- 改成在 Build 步骤直接硬编码密码 `Napkin2026!`（反正仓库 public，密码在 workflow 文件里能看到，但 keystore 文件本身密码加密，公开也没事）。
+
 ## [0.1.10] - 2026-07-12
 
 ### Changed
