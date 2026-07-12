@@ -13,6 +13,13 @@ Adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - 批量生成（同 prompt 多 seed）
 - 自定义 prompt 模板
 
+## [0.1.9] - 2026-07-12
+
+### Changed
+- CI 改为现场生成签名 keystore（keytool 直接在 CI 跑），避免本地生成 keystore + 跨 JDK 读取的兼容性问题。
+- 副作用：每次构建签名会变，意味着新版 APK 装上会覆盖旧版（ uninstall + install），暂时无法做到"无缝升级"。
+- 后续 v0.2.0 会通过 GitHub Secrets 配置固定 keystore 实现稳定签名。
+
 ## [0.1.8] - 2026-07-12
 
 ### Fixed

@@ -42,9 +42,19 @@ jobs:
       - name: Setup Signing Keystore
         if: startsWith(github.ref, 'refs/tags/v')
         run: |
-          # keystore 文件直接 commit 在仓库 .github/keystore/ 下
-          # 文件本身是密码加密的，即使仓库 public 也不能直接用
-          cp .github/keystore/napkin-release.jks napkin-release.keystore
+          # 在 CI 环境现场生成 keystore（避免跨 JDK 版本兼容性问题）
+          # 缺点：每次构建签名会变，但同一 major 版本内可接受
+          # 后续如需稳定签名，再通过 GitHub Secrets 配置固定 keystore
+          keytool -genkeypair \
+            -v \
+            -keystore napkin-release.keystore \
+            -alias napkin \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 9125 \
+            -storepass Napkin2026! \
+            -keypass Napkin2026! \
+            -dname "CN=Napkin, OU=App, O=Napkin, L=Beijing, ST=Beijing, C=CN"
           echo "KEYSTORE_PATH=$(pwd)/napkin-release.keystore" >> $GITHUB_ENV
           printf 'KEYSTORE_PASSWORD=%s\n' 'Napkin2026!' >> $GITHUB_ENV
           printf 'KEY_ALIAS=%s\n' 'napkin' >> $GITHUB_ENV
