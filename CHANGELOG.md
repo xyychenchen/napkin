@@ -13,6 +13,14 @@ Adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - 批量生成（同 prompt 多 seed）
 - 自定义 prompt 模板
 
+## [0.1.12] - 2026-07-13
+
+### Changed
+- 🎉 固定签名 keystore！通过 GitHub Secrets 配置（KEYSTORE_BASE64 / KEYSTORE_PASSWORD / KEY_ALIAS / KEY_PASSWORD），所有版本共用同一个 keystore。
+- 删除仓库里 commit 的 keystore 文件（不再需要，secret 里有）。
+- **以后所有版本都能无缝升级**，不用卸载旧版。
+- 副作用：v0.1.12 的签名跟之前 v0.1.11 不一样（换了新 keystore），所以**装 v0.1.12 前要先卸载 v0.1.11**。从 v0.1.12 开始之后所有版本都能直接覆盖升级。
+
 ## [0.1.11] - 2026-07-12
 
 ### Fixed
